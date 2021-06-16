@@ -74,7 +74,7 @@ class LinearLayoutAdapter<E : ListItem>(
                 callback?.let {
                     holder.binding.setVariable(BR.callback, it)
                 }
-                holder.binding.setVariable(BR.model, dataSource[position])
+                holder.binding.setVariable(BR.match, dataSource[position])
                 holder.binding.executePendingBindings()
             }
             is EmptyVH -> {
@@ -98,7 +98,10 @@ class LinearLayoutAdapter<E : ListItem>(
 //Callback and utility classes
 interface RecyclerViewCallback {
 
-    fun onClick(item: ListItem) {
+    fun onDeclineClicked(item: ListItem) {
+
+    }
+    fun onAcceptClicked(item: ListItem) {
 
     }
 }

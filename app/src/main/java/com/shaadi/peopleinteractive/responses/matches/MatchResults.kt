@@ -3,9 +3,12 @@ package com.shaadi.peopleinteractive.responses.matches
 
 import com.google.gson.annotations.SerializedName
 import com.shaadi.peopleinteractive.common.ListItem
+import com.shaadi.peopleinteractive.database.MatchEntity
 import java.io.Serializable
 
-data class Result(
+data class MatchResults(
+    @SerializedName("id")
+    val id: Id,
     @SerializedName("cell")
     val cell: String,
     @SerializedName("dob")
@@ -14,8 +17,6 @@ data class Result(
     val email: String,
     @SerializedName("gender")
     val gender: String,
-    @SerializedName("id")
-    val id: Id,
     @SerializedName("location")
     val location: Location,
     @SerializedName("login")
@@ -30,4 +31,16 @@ data class Result(
     val picture: Picture,
     @SerializedName("registered")
     val registered: Registered
-): ListItem, Serializable
+) : ListItem, Serializable {
+
+    fun <T : Any?> convertTo(clazz: Class<T>?): T? {
+        if (clazz == MatchEntity::class.java) {
+            return MatchEntity(
+                name.title + " " + name.first + " " + name.last,
+                picture.medium,
+                -1
+            ) as T
+        }
+        return null
+    }
+}

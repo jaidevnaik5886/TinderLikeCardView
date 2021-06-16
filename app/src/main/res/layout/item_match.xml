@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="model"
-            type="com.shaadi.peopleinteractive.responses.matches.Result" />
+            name="match"
+            type="com.shaadi.peopleinteractive.database.MatchEntity" />
 
         <variable
             name="callback"
@@ -17,7 +17,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardElevation="@dimen/margin"
         android:layout_margin="@dimen/margin"
         app:cardUseCompatPadding="true">
@@ -25,8 +25,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/margin"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/marginDouble"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -35,9 +35,9 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginQuad"
+                android:layout_marginTop="@dimen/marginDouble"
                 android:gravity="center"
-                android:text='@{model.name.title+" "+model.name.first+" "+model.name.last}'
+                android:text='@{match.name}'
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -52,30 +52,34 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:image="@{model.picture.medium}"
+                app:image="@{match.photo}"
                 app:placeholder="@{@drawable/ic_launcher_background}"
                 tools:src="@mipmap/ic_launcher_round" />
 
-            <Button
-                android:id="@+id/button"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_decline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
-                app:layout_constraintBottom_toBottomOf="@+id/button2"
-                app:layout_constraintEnd_toStartOf="@+id/button2"
+                android:text="@string/decline"
+                android:backgroundTint="@color/red"
+                android:onClick="@{() -> callback.onDeclineClicked(match)}"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_accept"
+                app:layout_constraintEnd_toStartOf="@+id/btn_accept"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button2" />
+                app:layout_constraintTop_toTopOf="@+id/btn_accept" />
 
-            <Button
-                android:id="@+id/button2"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Button"
+                android:text="@string/button"
+                android:backgroundTint="@color/green"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{() -> callback.onAcceptClicked(match)}"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button"
+                app:layout_constraintStart_toEndOf="@+id/btn_decline"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

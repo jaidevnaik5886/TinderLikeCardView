@@ -8,6 +8,7 @@ import com.shaadi.peopleinteractive.base.BaseViewModel
 import com.shaadi.peopleinteractive.common.ListItem
 import com.shaadi.peopleinteractive.common.RecyclerViewCallback
 import com.shaadi.peopleinteractive.common.addDataSource
+import com.shaadi.peopleinteractive.database.MatchEntity
 import com.shaadi.peopleinteractive.databinding.FragmentMatchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,12 +21,17 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
     override fun attachBinding() {
         binding.handler = this
         binding.vm = model
-        model.matches.observe(viewLifecycleOwner, {
+        binding.vm = model
+        model.getPeopleMatches().observe(viewLifecycleOwner, {
             binding.rvMatches.addDataSource(
-                it.data?.results?: emptyList(),
+                it?: emptyList(),
                 R.layout.item_match,
                 object : RecyclerViewCallback {
-                    override fun onClick(item: ListItem) {
+                    override fun onDeclineClicked(item: ListItem) {
+                        model.onDeclineClicked(item as MatchEntity)
+                    }
+
+                    override fun onAcceptClicked(item: ListItem) {
 
                     }
                 },
