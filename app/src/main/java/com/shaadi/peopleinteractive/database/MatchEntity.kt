@@ -3,6 +3,7 @@ package com.shaadi.peopleinteractive.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.shaadi.peopleinteractive.common.ListItem
+import com.shaadi.peopleinteractive.utils.Constants
 import java.io.Serializable
 
 
@@ -12,7 +13,8 @@ import java.io.Serializable
 data class MatchEntity(
     val name: String?,
     val photo: String?,
-    val status: Int
+    @Constants.Companion.STATUS
+    var status: Int
 ) : Serializable,ListItem {
 
     @PrimaryKey(autoGenerate = true)

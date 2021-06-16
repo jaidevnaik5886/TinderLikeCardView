@@ -3,6 +3,7 @@ package com.shaadi.peopleinteractive.ui.matches
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.shaadi.peopleinteractive.R
+import com.shaadi.peopleinteractive.base.BaseEvent
 import com.shaadi.peopleinteractive.base.BaseFragment
 import com.shaadi.peopleinteractive.base.BaseViewModel
 import com.shaadi.peopleinteractive.common.ListItem
@@ -32,7 +33,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
                     }
 
                     override fun onAcceptClicked(item: ListItem) {
-
+                        model.onAcceptClicked(item as MatchEntity)
                     }
                 },
                 RecyclerView.HORIZONTAL,
@@ -43,6 +44,15 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
 
     override fun getVM(): BaseViewModel = model
 
+    override fun handleEvent(event: BaseEvent) {
+        super.handleEvent(event)
+        when(event) {
+            is RefreshEvent -> {
+                binding.rvMatches.adapter!!.notifyDataSetChanged()
+            }
+        }
+    }
 
 }
+
 

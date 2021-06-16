@@ -2,5 +2,7 @@
     <string name="app_name">PeopleInteractive</string>
     <string name="no_data_available">No Results found</string>
     <string name="decline">Decline</string>
-    <string name="button">Button</string>
+    <string name="accept">Accept</string>
+    <string name="member_declined">Member Declined</string>
+    <string name="member_accepted">Member Accepted</string>
 </resources>

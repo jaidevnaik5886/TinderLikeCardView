@@ -4,6 +4,7 @@ package com.shaadi.peopleinteractive.responses.matches
 import com.google.gson.annotations.SerializedName
 import com.shaadi.peopleinteractive.common.ListItem
 import com.shaadi.peopleinteractive.database.MatchEntity
+import com.shaadi.peopleinteractive.utils.Constants
 import java.io.Serializable
 
 data class MatchResults(
@@ -38,7 +39,7 @@ data class MatchResults(
             return MatchEntity(
                 name.title + " " + name.first + " " + name.last,
                 picture.medium,
-                -1
+                Constants.DEFAULT
             ) as T
         }
         return null
