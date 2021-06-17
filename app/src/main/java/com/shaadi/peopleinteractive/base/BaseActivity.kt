@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.shaadi.peopleinteractive.R
 
 
 abstract class BaseActivity<out T : ViewDataBinding>(@LayoutRes val layoutId: Int) :
@@ -56,6 +57,9 @@ abstract class BaseActivity<out T : ViewDataBinding>(@LayoutRes val layoutId: In
                 }
                 is SuccessEvent -> {
                     Toast.makeText(this, event.message, Toast.LENGTH_SHORT).show()
+                }
+                is NoInternetEvent -> {
+                    Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
                 }
                 else -> {
                     handleEvent(event)

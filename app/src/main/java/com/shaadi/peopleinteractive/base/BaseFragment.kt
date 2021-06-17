@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.shaadi.peopleinteractive.R
 import com.shaadi.peopleinteractive.common.hideKeyboard
 
 
@@ -50,6 +51,9 @@ abstract class BaseFragment<out T : ViewDataBinding>(
                 }
                 is SuccessEvent -> {
                     Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+                is NoInternetEvent -> {
+                    Toast.makeText(context, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
                 }
                 is CloseKeyboardEvent -> {
                     hideKeyboard()
