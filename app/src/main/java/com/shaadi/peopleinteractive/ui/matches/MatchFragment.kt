@@ -1,7 +1,9 @@
 package com.shaadi.peopleinteractive.ui.matches
 
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.shaadi.peopleinteractive.R
 import com.shaadi.peopleinteractive.base.BaseEvent
 import com.shaadi.peopleinteractive.base.BaseFragment
@@ -22,7 +24,6 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
     override fun attachBinding() {
         binding.handler = this
         binding.vm = model
-        binding.vm = model
         model.getPeopleMatches().observe(viewLifecycleOwner, {
             binding.rvMatches.addDataSource(
                 it?: emptyList(),
@@ -40,6 +41,8 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>(R.layout.fragment_match
                 R.string.no_data_available
             )
         })
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView( binding.rvMatches)
     }
 
     override fun getVM(): BaseViewModel = model
