@@ -23,15 +23,15 @@ open class BaseViewModel : ViewModel() {
 
     //Make network call
     public fun launch(
-        context: CoroutineContext = EmptyCoroutineContext,
-        start: CoroutineStart = CoroutineStart.DEFAULT,
         block: suspend CoroutineScope.() -> Unit
-    ): Job? {
-        try {
-            return viewModelScope.launch(context, start, block)
-        } catch (e: Exception) {
-            sendEvent(ErrorEvent(e.message ?: ""))
-            return null
+    ): Job {
+        return viewModelScope.launch {
+            try {
+                block()
+            }
+            catch (e: Exception) {
+                sendEvent(ErrorEvent(e.message ?: ""))
+            }
         }
     }
 }

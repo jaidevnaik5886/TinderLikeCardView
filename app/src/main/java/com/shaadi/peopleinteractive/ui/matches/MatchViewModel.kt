@@ -18,9 +18,9 @@ class MatchViewModel @Inject constructor(
     val matches = MutableLiveData<List<MatchEntity>>()
 
     init {
-        if (isInternetAvailable()) {
-            fetchMatches()
-        }
+       // if (isInternetAvailable()) {
+          fetchMatches()
+       // }
     }
 
     private fun isInternetAvailable(): Boolean {
